@@ -1,0 +1,14 @@
+
+.calendar {
+  clear: both;
+  max-width: 9em;
+  margin: 0 auto;
+}
+
+.calendar > div {
+  width: 33%;
+  float: left;
+  line-height: 3em;
+  vertical-align: middle;
+  text-align: center;
+}
