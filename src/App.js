@@ -11,6 +11,8 @@ function App({date = new Date()}) {
     return () => clearInterval(id);
   }, []);
 
+  throw new Error('yo');
+
   return (
     <div className="App">
       <Now now={now} />

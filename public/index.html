@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <script>window.onerror = function (message) {
-    alert(message);
+  <script>window.onerror = function (message, source, lineno, colno, error) {
+    var report = '';
+    report += "\n" + error.toString();
+    report += "\n" + JSON.stringify(error, null, 2);
+    document.getElementById('error-root').innerText = report;
+    return false;
   };</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,6 +28,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <pre id="error-root"></pre>
     <div id="root"></div>
     <!--
       This HTML file is a template.
