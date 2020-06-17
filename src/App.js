@@ -35,7 +35,7 @@ function Month({ now, month }) {
 
   const past = now.getMonth() > then.getMonth();
   const present = now.getMonth() === then.getMonth();
-  const future = now.getMonth() < month - 1;
+  const future = now.getMonth() < month;
 
   const name = then.toLocaleString('default', { month: 'short' });
 
