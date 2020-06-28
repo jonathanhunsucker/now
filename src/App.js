@@ -43,7 +43,7 @@ function Month({ now, month }) {
 
   return <div className="month">
     {past && <strike>{name}</strike>}
-    {present && <em>{now.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })}</em>}
+    {present && <em>{now.toLocaleString('default', { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })}</em>}
     {future && <span>{name}</span>}
   </div>
 }
