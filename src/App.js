@@ -13,10 +13,10 @@ function App({date = new Date()}) {
 
   return (
     <div className="App">
-      <Clip now={now} isNegative={true} scale={.85}>
+      <Clip now={now} isNegative={true}>
         <Now now={now} />
       </Clip>
-      <Clip now={now} isNegative={false} scale={.85}>
+      <Clip now={now} isNegative={false}>
         <Now now={now} />
       </Clip>
     </div>
@@ -50,7 +50,7 @@ function Month({ now, month }) {
   </div>
 }
 
-function Clip({ now, isNegative, children, scale }) {
+function Clip({ now, isNegative, children }) {
   const janOneThisYear = new Date(now)
   janOneThisYear.setMonth(0)
   janOneThisYear.setDate(1)
@@ -60,7 +60,7 @@ function Clip({ now, isNegative, children, scale }) {
   const janOneNextYear = new Date(janOneThisYear)
   janOneNextYear.setYear(janOneNextYear.getFullYear() + 1)
   const height = (now - janOneThisYear) / (janOneNextYear - janOneThisYear)
-  const formatted = `${(height * scale * 100).toFixed(2)}`
+  const formatted = `${(height * 100).toFixed(2)}`
   const style = isNegative ? { color: 'white', background: 'black', height: `${formatted}vh` } : { color: 'black', background: 'white', marginTop: `-${formatted}vh` }
   return (
     <div className="BackdropContainer">
