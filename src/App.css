@@ -1,14 +1,27 @@
-
-.calendar {
-  clear: both;
-  max-width: 9em;
-  margin: 0 auto;
+#error-root {
+  margin: 0;
 }
 
-.calendar > div {
-  width: 33%;
-  float: left;
-  line-height: 3em;
-  vertical-align: middle;
+.App {
+  position: relative;
+  font-size: 200%;
+}
+
+.Calendar {
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  height: 100vh;
+  align-items: center;
+  width: 100vw;
   text-align: center;
+}
+
+.BackdropContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  color: white;
+  background-color: black;
+  overflow: hidden;
 }
