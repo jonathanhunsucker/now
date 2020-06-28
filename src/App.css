@@ -4,7 +4,7 @@
 
 .App {
   position: relative;
-  font-size: 7vh;
+  font-size: 6.5vh;
 }
 
 .Calendar {
@@ -14,14 +14,10 @@
   align-items: center;
   width: 100vw;
   text-align: center;
+  overflow: hidden;
 }
 
 .BackdropContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
-  color: white;
-  background-color: black;
   overflow: hidden;
 }
