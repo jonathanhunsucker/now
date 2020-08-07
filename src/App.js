@@ -18,6 +18,7 @@ function App({date = new Date()}) {
   }, [])
 
   function onPointerDown(event) {
+    event.currentTarget.setPointerCapture(event.pointerId)
     setPointerY(calculatePointerYFromEvent(event))
   }
   function onPointerMove(event) {
@@ -64,7 +65,7 @@ function Month({ now, month }) {
 
   const name = then.toLocaleString('default', { month: 'long' })
 
-  return <div className="month">
+  return <div className="Month">
     {past && <strike>{name}</strike>}
     {present && <em>{now.toLocaleString('default', { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })}</em>}
     {future && <span>{name}</span>}
