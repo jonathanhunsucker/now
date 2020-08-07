@@ -8,7 +8,7 @@ function App({date = new Date()}) {
 
   // position of last pointer down
   // eg. `0` is top of screen, and `1` is bottom
-  const [pointerY, setPointerY] = useState(0.3832923832923833)
+  const [pointerY, setPointerY] = useState(null)
 
   const time = pointerY !== null ? translatePointerPositionToDate(now, pointerY) : now
 
