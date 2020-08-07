@@ -6,18 +6,40 @@ const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 function App({date = new Date()}) {
   const [now, setNow] = useState(date)
 
+  // position of last pointer down
+  // eg. `0` is top of screen, and `1` is bottom
+  const [pointerY, setPointerY] = useState(0.3832923832923833)
+
+  const time = pointerY !== null ? translatePointerPositionToDate(now, pointerY) : now
+
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(id)
   }, [])
 
+  function onPointerDown(event) {
+    setPointerY(calculatePointerYFromEvent(event))
+  }
+  function onPointerMove(event) {
+    setPointerY(calculatePointerYFromEvent(event))
+  }
+  function onPointerUp() {
+    setPointerY(null)
+  }
+
   return (
-    <div className="App">
-      <Clip now={now} isNegative={true}>
-        <Now now={now} />
+    <div
+      className="App"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerLeave={onPointerUp}
+    >
+      <Clip now={time} isNegative={true}>
+        <Now now={time} />
       </Clip>
-      <Clip now={now} isNegative={false}>
-        <Now now={now} />
+      <Clip now={time} isNegative={false}>
+        <Now now={time} />
       </Clip>
     </div>
   )
@@ -34,8 +56,7 @@ function Now({ now }) {
 }
 
 function Month({ now, month }) {
-  const then = new Date(now)
-  then.setMonth(month)
+  const then = new Date(now.getFullYear(), month, 1, 0, 0, 0, 0)
 
   const past = now.getMonth() > then.getMonth()
   const present = now.getMonth() === then.getMonth()
@@ -69,6 +90,26 @@ function Clip({ now, isNegative, children }) {
       </div>
     </div>
   )
+}
+
+function calculatePointerYFromEvent(event) {
+  return (event.clientY - event.currentTarget.clientTop) / event.currentTarget.clientHeight
+}
+
+function translatePointerPositionToDate(date, pointerY) {
+  const [start, end] = getYearBookendsFromDate(date).map((date) => date.getTime())
+  const result = new Date(linearInterpolate(start, end, pointerY))
+  return result
+}
+
+function getYearBookendsFromDate(date) {
+  const start = new Date(date.getFullYear(), 0, 0, 0, 0, 0)
+  const end = new Date(date.getFullYear() + 1, 0, 0, 0, 0, 0)
+  return [start, end]
+}
+
+function linearInterpolate(start, end, point) {
+  return start + (end - start) * point
 }
 
 export default App
