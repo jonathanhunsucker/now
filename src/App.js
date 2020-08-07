@@ -22,7 +22,7 @@ function App({date = new Date()}) {
     setPointerY(calculatePointerYFromEvent(event))
   }
   function onPointerMove(event) {
-    setPointerY(calculatePointerYFromEvent(event))
+    pointerY !== null && setPointerY(calculatePointerYFromEvent(event))
   }
   function onPointerUp() {
     setPointerY(null)
@@ -34,7 +34,7 @@ function App({date = new Date()}) {
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
-      onPointerLeave={onPointerUp}
+      onPointerCancel={onPointerUp}
     >
       <Clip now={time} isNegative={true}>
         <Now now={time} />
